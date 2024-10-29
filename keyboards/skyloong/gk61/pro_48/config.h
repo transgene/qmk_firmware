@@ -11,3 +11,5 @@
 #define MAC_MOD_INDEX 17
 
 #define g_suspend_state rgb_matrix_get_suspend_state()
+
+#define TAPPING_TERM_PER_KEY

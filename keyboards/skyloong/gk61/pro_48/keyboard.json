@@ -1,6 +1,6 @@
 {
-    "manufacturer": "skyloong",
-    "keyboard_name": "gk61 pro 48",
+    "manufacturer": "Skyloong",
+    "keyboard_name": "GK61 Pro 48",
     "maintainer": "NaturalZh",
     "bootloader": "stm32duino",
 
@@ -12,8 +12,8 @@
     },
     "features": {
         "bootmagic": true,
-        "command": true,
-        "console": false,
+        "command": false,
+        "console": true,
         "encoder": true,
         "extrakey": true,
         "mousekey": true,
@@ -30,27 +30,7 @@
     "processor": "STM32F103",
     "rgb_matrix": {
         "animations": {
-            "breathing": true,
-            "band_spiral_val": true,
-            "cycle_all": true,
-            "cycle_left_right": true,
-            "cycle_up_down": true,
-            "cycle_out_in": true,
-            "cycle_out_in_dual": true,
-            "rainbow_moving_chevron": true,
-            "cycle_pinwheel": true,
-            "cycle_spiral": true,
-            "dual_beacon": true,
-            "raindrops": true,
-            "jellybean_raindrops": true,
-            "pixel_rain": true,
-            "typing_heatmap":true,
-            "digital_rain": true,
-            "solid_reactive_simple": true,
-            "solid_reactive_multiwide": true,
-            "solid_reactive_multinexus": true,
-            "splash": true,
-            "solid_splash": true
+            "solid_color": true
         },
         "driver": "is31fl3743a",
         "layout": [
@@ -124,7 +104,20 @@
         "sat_steps": 20,
         "speed_steps": 20,
         "val_steps": 20,
-        "sleep": true
+        "sleep": true,
+        "timeout": 600000,
+        "default": {
+            "animation": "solid_color",
+            "val": 150,
+            "hue": 21,
+            "sat": 255
+        }
+    },
+    "caps_word": {
+        "enabled": true,
+        "both_shifts_turns_on": false,
+        "double_tap_shift_turns_on": false,
+        "idle_timeout": 5000
     },
     "url": "https://github.com/JZ-Skyloong",
     "usb": {
