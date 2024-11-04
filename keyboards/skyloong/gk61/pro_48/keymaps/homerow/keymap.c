@@ -224,6 +224,23 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+void raw_hid_receive(uint8_t *data, uint8_t length) {
+    uint8_t command = data[0];
+    switch (command) {
+        case 0x30:
+            uprintf("Turning RGB off\n");
+            rgb_matrix_sethsv(21, 255, 1);
+            break;
+        case 0x31:
+            uprintf("Turning RGB on\n");
+            rgb_matrix_sethsv(21, 255, 150);
+            break;
+        default:
+            uprintf("Unknown command: 0x%02X\n", command);
+            break;
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   // If console is enabled, it will print the matrix position and status of each key pressed
 #ifdef CONSOLE_ENABLE

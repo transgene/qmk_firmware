@@ -108,9 +108,9 @@
         "timeout": 600000,
         "default": {
             "animation": "solid_color",
-            "val": 150,
             "hue": 21,
-            "sat": 255
+            "sat": 255,
+            "val": 150
         }
     },
     "caps_word": {
