@@ -13,6 +13,3 @@
 #define g_suspend_state rgb_matrix_get_suspend_state()
 
 #define TAPPING_TERM_PER_KEY
-#define PERMISSIVE_HOLD
-
-#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD 
