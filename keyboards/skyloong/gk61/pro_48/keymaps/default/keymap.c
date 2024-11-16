@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [FUNC_NAV] = LAYOUT_all(
-        KC_TRNS,      KC_F1,      KC_F2,      KC_F3,        KC_F4,        KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,     KC_F10,     KC_F11,     KC_F12,    KC_DEL, 
+         KC_GRV,      KC_F1,      KC_F2,      KC_F3,        KC_F4,        KC_F5,      KC_F6,      KC_F7,      KC_F8,      KC_F9,     KC_F10,     KC_F11,     KC_F12,    KC_DEL, 
         KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    LSA(KC_2),    LSA(KC_3),    KC_TRNS,    KC_HOME,    KC_PGUP,    KC_PGDN,     KC_DEL,    KC_BSPC,     KC_INS,   KC_TRNS, 
         KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,      KC_TRNS,    KC_LEFT,    KC_DOWN,      KC_UP,    KC_RGHT,     KC_END,    KC_PSCR,               KC_TRNS, 
         KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                KC_TRNS, 
@@ -110,10 +110,17 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 // TODO: refactor and add comments (https://docs.qmk.fm/features/tap_dance#example-6) - START
 td_state_t cur_dance(tap_dance_state_t *state) {
     if (state->count == 1) {
-        if (!state->pressed) return TD_SINGLE_TAP;
-        else return TD_SINGLE_HOLD;
-    } else if (state->count == 2) return TD_DOUBLE_TAP;
-    else return TD_UNKNOWN;
+        if (!state->pressed) {
+            return TD_SINGLE_TAP;
+        } else {
+            return TD_SINGLE_HOLD;
+        }
+    } else if (state->count >= 2) {
+        return TD_DOUBLE_TAP;
+    }
+    else {
+        return TD_UNKNOWN;
+    }
 }
 
 static td_tap_t ql_tap_state = {
