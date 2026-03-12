@@ -117,8 +117,7 @@ td_state_t cur_dance(tap_dance_state_t *state) {
         }
     } else if (state->count >= 2) {
         return TD_DOUBLE_TAP;
-    }
-    else {
+    } else {
         return TD_UNKNOWN;
     }
 }
@@ -128,6 +127,14 @@ static td_tap_t ql_tap_state = {
     .state = TD_NONE
 };
 
+// This fires instantly every time the key goes down
+void ql_each_tap(tap_dance_state_t *state, void *user_data) {
+    if (state->count == 2) {
+        tap_code16(LSA(KC_1));  // Send Shift+Alt+1 immediately
+        reset_tap_dance(state); // Terminate the dance so we don't wait for the timeout
+    }
+}
+
 void ql_finished(tap_dance_state_t *state, void *user_data) {
     ql_tap_state.state = cur_dance(state);
     switch (ql_tap_state.state) {
@@ -136,16 +143,12 @@ void ql_finished(tap_dance_state_t *state, void *user_data) {
         case TD_SINGLE_HOLD:
             layer_on(FUNC_NAV);
             break;
-        case TD_DOUBLE_TAP:
-            tap_code16(LSA(KC_1));        
-            break;
         default:
             break;
     }
 }
 
 void ql_reset(tap_dance_state_t *state, void *user_data) {
-    // If the key was held down and now is released then switch off the layer
     if (ql_tap_state.state == TD_SINGLE_HOLD) {
         layer_off(FUNC_NAV);
     }
@@ -165,7 +168,7 @@ void dance_default_layers(tap_dance_state_t *state, void *user_data) {
 
 // Tap Dance definitions
 tap_dance_action_t tap_dance_actions[] = {
-    [TD_ML_FNAV_EN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, ql_finished, ql_reset), // Hold to turn on func-and-nav layer, twice for English layout
+    [TD_ML_FNAV_EN] = ACTION_TAP_DANCE_FN_ADVANCED(ql_each_tap, ql_finished, ql_reset),
     [TD_NOP_FN_DF_GAME_OR_BASE] = ACTION_TAP_DANCE_FN(dance_default_layers)
 };
 // TODO - END
